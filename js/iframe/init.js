@@ -2,9 +2,9 @@
  * Created by Fred.Wu on 2014/11/22.
  */
 
-var prance_iframe_init = {
+var prance_iframe = {
   box: null,
-  debug: true,
+  __debug: prance_layout.__debug,
   init: function () {
     prance_iframe_event.init();
     //

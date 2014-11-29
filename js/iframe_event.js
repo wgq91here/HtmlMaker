@@ -6,6 +6,12 @@ $(document).ready(function () {
 
   console.log('iframe Loading...');
 
+/*  var PRANCE_IFRAME_TOOLS = {
+    add: function (obj, target_obj) {
+      obj.add(target_obj);
+    }
+  };*/
+
   var prance_iframe_event = window.parent.prance_iframe_event;
   var item_active = null;
   $('body').mouseover(function (event) {
@@ -32,6 +38,7 @@ $(document).ready(function () {
   $(window).scroll(function (event) {
     prance_iframe_event.on_iframe_scroll($('body').scrollTop());
   });
+
 
   console.log('iframe Loading... Over');
   //window.parent.webix.message("over");

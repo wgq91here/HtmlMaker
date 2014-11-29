@@ -19,6 +19,8 @@ var PRANCE_JS = {
 };
 
 $(document).ready(function () {
+  if (!webix.env.touch && webix.ui.scrollSize)
+    webix.CustomScroll.init();
 
   PRANCE_JS.javascript_url = 'js/';
   PRANCE_JS.load_component([
@@ -34,26 +36,22 @@ $(document).ready(function () {
       PRANCE_JS.get_javascript_path('iframe/init'),
       PRANCE_JS.get_javascript_path('iframe/event')
     ], function () {
-      prance_iframe_init.init();
-      prance_iframe_event.selected_object.click(function () {
-        alert('s');
-      });
+      prance_iframe.init();
+      PRANCE_JS.load_component([
+        PRANCE_JS.get_javascript_path('app/iframe_page')
+      ])
     });
     //
-    prance_ui_object.prance_iframe().attachEvent("onBeforeLoad", function () {
-      console.log('onBeforeLoad');
-    });
-    prance_ui_object.prance_iframe().attachEvent('onAfterLoad', function () {
-      console.log('onAfterLoad');
-      //PRANCE_JS.patch_javascript_iframe();
-    });
-    prance_ui_object.prance_iframe().load("data/fda_blog.html");
-
     PRANCE_JS.load_component([
       PRANCE_JS.get_javascript_path('console/init')
     ], function () {
       prance_console.init();
     });
+//
+//
+//
+    PRANCE_JS.load_component([
+      PRANCE_JS.get_javascript_path('app/menu')]);
 
   });
 
@@ -77,7 +75,7 @@ $(document).ready(function () {
    webix.ready(function () {
    prance_ui_object.prance_iframe().attachEvent("onBeforeLoad", function () {
    console.log('onBeforeLoad');
-   prance_iframe_init.init();
+   prance_iframe.init();
    });
    prance_ui_object.prance_iframe().attachEvent('onAfterLoad', function () {
    console.log('onAfterLoad');

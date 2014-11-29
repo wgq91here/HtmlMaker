@@ -3,6 +3,8 @@
  */
 
 var prance_pc_console;
+prance_pc_console = null;
+//
 var prance_console = {
   //console: null,
   socket_ip: '',
@@ -10,6 +12,7 @@ var prance_console = {
   timeout: 2000,
   console_id: 'pc_console',
   id: 'body-command',
+  __debug: prance_layout.__debug,
   init: function () {
     this.window_ui = webix.ui({
       view: "window",
@@ -25,7 +28,7 @@ var prance_console = {
         id: 'prance_command_win_body'
       },
       on: {
-        onShow: function() {
+        onShow: function () {
           if (!window.prance_pc_console) {
             prance_console.start();
           }
@@ -41,7 +44,7 @@ var prance_console = {
   },
   start: function () {
     var header = 'Welcome to PranceCloud!\n' +
-        'Type help to help.\n';
+      'Type help to help.\n';
     window.prance_pc_console = $('#' + this.console_id).jqconsole(header, '# ');
 
     // Abort prompt on Ctrl+Z.
