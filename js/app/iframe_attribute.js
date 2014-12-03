@@ -13,14 +13,7 @@ prance_iframe_event.selected_object.click(function () {
 
 prance_ui_object.prance_iframe().attachEvent('onAfterLoad', function () {
   //$$('attribute-nodetree').setHTML('date');
-  prance_iframe_event._iframe_all_node = prance_iframe_event.get_all_object();
-  dDebug(prance_iframe_event._iframe_all_node);
-  $$('attribute-nodetree').clearAll();
-  var node_tree_values = jQuery.map(prance_iframe_event._iframe_all_node, function (n, i) {
-    if (n.nodeName == 'SCRIPT') return ;
-    return {id: i, nodName: n.nodeName};
-  });
-  $$('attribute-nodetree').parse(JSON.stringify(node_tree_values));
-  $$('attribute-nodetree').refresh();
-  dDebug(node_tree_values);
+  prance_iframe_event.selected_object.hide();
+  prance_iframe_event.selected_object_menu.hide();
+  prance_iframe_event.on_iframe_body_change();
 });

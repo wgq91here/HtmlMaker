@@ -15,112 +15,118 @@ var prance_iframe_event = {
     // mouse_enter_object
     $('body').append($('<div id="prance_iframe_event_mouse_enter_object"></div>'));
     $('#prance_iframe_event_mouse_enter_object')
-        .addClass('not-edit')
-        .css('position', 'absolute')
-        .css('border-radius', '3px')
-        .css('font-size', '9px')
-        .css('font-family', 'Tahoma')
-        .css('color', '#333')
-        .css('background-color', 'rgb(154, 205, 50)')
-        .css('padding', '2')
-        .css('margin', '0')
-        .css('display', 'none');
+      .addClass('not-edit')
+      .css('position', 'absolute')
+      .css('border-radius', '3px')
+      .css('font-size', '9px')
+      .css('font-family', 'Tahoma')
+      .css('color', '#333')
+      .css('background-color', 'rgb(154, 205, 50)')
+      .css('padding', '2')
+      .css('margin', '0')
+      .css('display', 'none');
     this.mouse_enter_object = $('#prance_iframe_event_mouse_enter_object');
     //
     $('body').append($('<div id="prance_iframe_event_selected_object"></div>'));
     $('#prance_iframe_event_selected_object')
-        .addClass('not-edit')
-        .css('cursor', 'pointer')
-        .css('position', 'absolute')
-        .css('border-radius', '3px')
-        .css('font-weight', 'bold')
-        .css('font-size', '10px')
-        .css('font-family', 'Tahoma')
-        .css('color', 'white')
-        .css('background-color', 'rgb(255, 48, 0)')
-        .css('padding', '2')
-        .css('margin', '0')
-        .css('display', 'none');
+      .addClass('not-edit')
+      .css('cursor', 'pointer')
+      .css('position', 'absolute')
+      .css('border-radius', '3px')
+      .css('font-weight', 'bold')
+      .css('font-size', '10px')
+      .css('font-family', 'Tahoma')
+      .css('color', 'white')
+      .css('background-color', 'rgb(255, 48, 0)')
+      .css('padding', '2')
+      .css('margin', '0')
+      .css('display', 'none');
     this.selected_object = $('#prance_iframe_event_selected_object');
     //
     $('body').append($('<div id="prance_iframe_event_selected_object_menu"></div>'));
     $('#prance_iframe_event_selected_object_menu')
-        .addClass('not-edit')
-        .css('cursor', 'pointer')
-        .css('position', 'absolute')
-        .css('border-radius', '3px')
-        .css('font-size', '10px')
-        .css('font-family', 'Tahoma')
-        .css('color', 'white')
-        .css('background-color', 'rgb(255, 148, 0)')
-        .css('padding', '2')
-        .css('margin', '0')
-        .css('display', 'none');
+      .addClass('not-edit')
+      .css('cursor', 'pointer')
+      .css('position', 'absolute')
+      .css('border-radius', '3px')
+      .css('font-size', '10px')
+      .css('font-family', 'Tahoma')
+      .css('color', 'white')
+      .css('background-color', 'rgb(255, 148, 0)')
+      .css('padding', '2')
+      .css('margin', '0')
+      .css('display', 'none');
     this.selected_object_menu = $('#prance_iframe_event_selected_object_menu');
     this.selected_object_menu
-        .append(function () {
-          return $('<span style="text-decoration: none;color:white;">Del</span>').click(function () {
-            prance_iframe_event.selected_destroy();
-          });
+      .append(function () {
+        return $('<span style="text-decoration: none;color:white;">Del</span>').click(function () {
+          prance_iframe_event.selected_destroy();
         });
+      });
     this.selected_object_menu
-        .append('<span> </span>');
+      .append('<span> </span>');
     this.selected_object_menu
-        .append(function () {
-          return $('<span style="text-decoration: none;color:white;">Copy</span>').click(function () {
-            prance_iframe_event.selected_copy();
-          });
+      .append(function () {
+        return $('<span style="text-decoration: none;color:white;">Copy</span>').click(function () {
+          prance_iframe_event.selected_copy();
         });
+      });
     this.selected_object_menu
-        .append('<span> </span>');
+      .append('<span> </span>');
     this.selected_object_menu
-        .append(function () {
-          return $('<span style="text-decoration: none;color:white;" id="iframe_selected_obj_insert">Insert</span>').click(function () {
-            prance_iframe_event.selected_insert();
-          });
+      .append(function () {
+        return $('<span style="text-decoration: none;color:white;" id="iframe_selected_obj_insert">Insert</span>').click(function () {
+          prance_iframe_event.selected_insert();
         });
-
-    //this.selected_object_menu.html('<a href="#" style="text-decoration: none;color:white;">Del</a> <a href="#" style="text-decoration: none;color:white;">Copy</a>');
+      });
   },
   debug: function (t) {
     if (this.__debug)
       prance_unit.bar_info('<b>Debug' + '(' + t + '): </b>'
-          + ' mouse_enter_object: ' + this.mouse_enter_object
-          + ' selected_object: ' + this.selected_object
-          + ' _selected_object_top: ' + this._selected_object_top
-          + ' _iframe_scroll_top: ' + this._iframe_scroll_top
+        + ' mouse_enter_object: ' + this.mouse_enter_object
+        + ' selected_object: ' + this.selected_object
+        + ' _selected_object_top: ' + this._selected_object_top
+        + ' _iframe_scroll_top: ' + this._iframe_scroll_top
       );
   },
   'get_all_object': function () {
     return prance_unit.webix_jquery_object('body-iframe')
-        .find('iframe').contents().find('body *');
+      .find('iframe').contents().find('body *');
   },
   'selected_insert': function () {
     webix.message(prance_iframe_event._iframe_select_object.context.nodeName);
   },
   'selected_append': function (obj) {
-    return prance_unit.webix_jquery_object('body-iframe')
-        .find('iframe').contents()
-        .find(this._iframe_select_object)
-        .append(obj);
+    var o = prance_unit.webix_jquery_object('body-iframe')
+      .find('iframe').contents()
+      .find(this._iframe_select_object)
+      .append(obj);
+    this.on_iframe_body_change();
+    return o;
   },
   'selected_replace': function (obj) {
-    return prance_unit.webix_jquery_object('body-iframe')
-        .find('iframe').contents()
-        .find(this._iframe_select_object)
-        .replaceWith(obj);
+    var o =  prance_unit.webix_jquery_object('body-iframe')
+      .find('iframe').contents()
+      .find(this._iframe_select_object)
+      .replaceWith(obj);
+    this.on_iframe_body_change();
+    return o;
   },
   'selected_before': function (obj) {
-    return prance_unit.webix_jquery_object('body-iframe')
-        .find('iframe').contents()
-        .find(this._iframe_select_object)
-        .before(obj);
+    var o = prance_unit.webix_jquery_object('body-iframe')
+      .find('iframe').contents()
+      .find(this._iframe_select_object)
+      .before(obj);
+    this.on_iframe_body_change();
+    return o;
   },
   'selected_after': function (obj) {
-    return prance_unit.webix_jquery_object('body-iframe')
-        .find('iframe').contents()
-        .find(this._iframe_select_object)
-        .after(obj);
+    var o = prance_unit.webix_jquery_object('body-iframe')
+      .find('iframe').contents()
+      .find(this._iframe_select_object)
+      .after(obj);
+    this.on_iframe_body_change();
+    return o;
   },
   'selected_destroy': function () {
     var selected_nodeName = this._iframe_select_object.context.nodeName;
@@ -150,27 +156,36 @@ var prance_iframe_event = {
       this.selected_object_menu.css('display', '');
     }
   },
+  'on_iframe_body_change': function () {
+    this._iframe_all_node = this.get_all_object();
+    var node_tree_values = jQuery.map(this._iframe_all_node, function (n, i) {
+      if (n.nodeName == 'SCRIPT') return;
+      return {id: 'node' + i, order_id: i, nodName: n.nodeName};
+    });
+    $$('attribute-nodetree').clearAll();
+    $$('attribute-nodetree').parse(JSON.stringify(node_tree_values));
+    $$('attribute-nodetree').refresh();
+  },
   'on_click': function (item) {
     var left = item.offset().left;
     var top = item.offset().top;
     var _left_fix = prance_ui_object.prance_toolbar().$width
-        + prance_ui_object.prance_iframe_left_space().$width;
+      + prance_ui_object.prance_iframe_left_space().$width;
     var _top_fix = prance_ui_object.prance_top().$height;
     // rem selected_object Top
     this._selected_object_top = top;
     //
     this._iframe_select_object = item;
-    dDebug(item);
     var selected_nodeName = this._iframe_select_object.context.nodeName;
     this.selected_object.html(selected_nodeName);
     //
     this.selected_object
-        .css('top', top - this._iframe_scroll_top + 15)
-        .css('left', left + _left_fix)
-        .css('opacity', '0.1')
-        .animate({
-          opacity: '1'
-        }, 500).fadeIn();
+      .css('top', top - this._iframe_scroll_top + 15)
+      .css('left', left + _left_fix)
+      .css('opacity', '0.1')
+      .animate({
+        opacity: '1'
+      }, 60).fadeIn();
     //
     switch (selected_nodeName.toLowerCase()) {
       //case 'body':
@@ -178,16 +193,18 @@ var prance_iframe_event = {
       //break;
       default:
         this.selected_object_menu
-            .css('top', top - this._iframe_scroll_top + 15)
-            .css('left', left + _left_fix + this.selected_object.width() + 8)
-            .css('opacity', '0.1')
-            .animate({
-              opacity: '1'
-            }, 260).fadeIn();
+          .css('top', top - this._iframe_scroll_top + 15)
+          .css('left', left + _left_fix + this.selected_object.width() + 8)
+          .css('opacity', '0.1')
+          .animate({
+            opacity: '1'
+          }, 60).fadeIn();
     }
 
     //
     setTimeout(this.auto_hide(), 1000);
+    //
+    $$('prance_leafs_win').hide();
     this.debug(this.selected_object);
     //do it
     //prance_ui_object.prance_attribute().setHTML(item.context.nodeName);
@@ -196,13 +213,13 @@ var prance_iframe_event = {
     var left = item.offset().left;
     var top = item.offset().top;
     var _left_fix = prance_ui_object.prance_toolbar().$width
-        + prance_ui_object.prance_iframe_left_space().$width;
+      + prance_ui_object.prance_iframe_left_space().$width;
     var _top_fix = prance_ui_object.prance_top().$height;
 
     this.mouse_enter_object
-        .css('left', left + _left_fix)
-        .css('top', top + _top_fix - this._iframe_scroll_top)
-        .css('display', '');
+      .css('left', left + _left_fix)
+      .css('top', top + _top_fix - this._iframe_scroll_top)
+      .css('display', '');
     var position_sign = (left > (prance_ui_object.prance_iframe().$width / 2)) ? '' : '';
     this.mouse_enter_object.html(item.context.nodeName + position_sign);
     // Debug
@@ -218,9 +235,9 @@ var prance_iframe_event = {
   },
   'auto_hide': function () {
     this.selected_object
-        .css('top', this._selected_object_top - this._iframe_scroll_top + 15);
+      .css('top', this._selected_object_top - this._iframe_scroll_top + 15);
     this.selected_object_menu
-        .css('top', this._selected_object_top - this._iframe_scroll_top + 15);
+      .css('top', this._selected_object_top - this._iframe_scroll_top + 15);
     // Auto Hidden
     if (prance_unit.cssFloat(this.selected_object, 'top') < prance_ui_object.prance_top().config.height) {
       this.on_selected_hide();

@@ -4,6 +4,13 @@
 
 var PRANCE_JS = {
   javascript_url: 'js/',
+  locale: 'zh-cn',
+  locale_array: {},
+  g: function (k) {
+    if (typeof(this.locale_array[k]) == 'undefined')
+      return k;
+    else return this.locale_array[k];
+  },
   get_javascript_path: function (js) {
     return this.javascript_url + js;
   },
@@ -24,10 +31,12 @@ $(document).ready(function () {
 
   PRANCE_JS.javascript_url = 'js/';
   PRANCE_JS.load_component([
+    PRANCE_JS.get_javascript_path('locale/' + PRANCE_JS.locale),
     PRANCE_JS.get_javascript_path('main/util'),
     PRANCE_JS.get_javascript_path('main/init'),
     //
     PRANCE_JS.get_javascript_path('main/layout'),
+    PRANCE_JS.get_javascript_path('main/layout/leafs'),
     PRANCE_JS.get_javascript_path('main/ui')
   ], function () {
     prance_layout.init();

@@ -2,130 +2,6 @@
  * Created by Fred.Wu on 2014/11/22.
  */
 
-require([PRANCE_JS.get_javascript_path('main/layout/pages.js')]);
-
-var big_film_set = [{
-  "id": 'blog',
-  "title": "Foundation Blog",
-  "url": "fda_blog.html",
-  "version": "0.1"
-}, {
-  "id": 'feed',
-  "title": "Foundation Feed",
-  "url": "fda_feed.html",
-  "version": "0.1"
-}, {
-  "id": 'gird',
-  "title": "Foundation Grid",
-  "url": "fda_grid.html",
-  "version": "0.1"
-}, {
-  "id": 'Orbit Home',
-  "title": "Foundation Orbit Home",
-  "url": "fda_orbit_home.html",
-  "version": "0.1"
-}, {
-  "id": 'Banded',
-  "title": "Foundation Banded",
-  "url": "fda_banded.html",
-  "version": "0.1"
-}, {
-  "id": 'Banner Home',
-  "title": "Foundation Banner Home",
-  "url": "fda_banner_home.html",
-  "version": "0.1"
-}, {
-  "id": 'Sidebar',
-  "title": "Foundation Sidebar",
-  "url": "fda_sidebar.html",
-  "version": "0.1"
-}, {
-  "id": 'Contact',
-  "title": "Foundation Contact",
-  "url": "fda_contact.html",
-  "version": "0.1"
-}, {
-  "id": 'Marketing',
-  "title": "Foundation Marketing",
-  "url": "fda_marketing.html",
-  "version": "0.1"
-}, {
-  "id": 'Realty',
-  "title": "Foundation Realty",
-  "url": "fda_realty.html",
-  "version": "0.1"
-}, {
-  "id": 'So Boxy',
-  "title": "Foundation So Boxy",
-  "url": "fda_so_boxy.html",
-  "version": "0.1"
-}];
-
-var prance_leafs_win_object = {
-  id: 'plw_tab_pages',
-  rows: [
-    {
-      view: "toolbar",
-      cols: [
-        {
-          view: 'menu',
-          width: 60,
-          type: {
-            width: 30
-          },
-          data: [
-            {iconcss: "webix_icon fa-plus-circle"},
-            {iconcss: "webix_icon fa-folder-o"}
-          ],
-          template: function (item) {
-            return prance_webix_tools.menu_x_template(item);
-          }
-        },
-        {},
-        {
-          view: 'menu',
-          width: 90,
-          type: {
-            width: 30
-          },
-          disabled: true,
-          id: 'leafs_pages_list_menu',
-          data: [
-            {iconcss: "webix_icon fa-trash-o"},
-            {iconcss: "webix_icon fa-pencil-square-o"},
-            {iconcss: "webix_icon fa-share-square-o"}
-          ],
-          template: function (item) {
-            return prance_webix_tools.menu_x_template(item);
-          },
-          on: {
-            onItemClick: function () {
-              //webix.message($$('leafs_pages_list').getSelectedItem().url);
-
-              prance_ui_object.prance_iframe().load("data/" + $$('leafs_pages_list').getSelectedItem().url);
-            }
-          }
-        }
-      ]
-    },
-    {
-      view: "list",
-      id: 'leafs_pages_list',
-      template: "<div style='padding: 4px;'><strong>#id# :</strong> #title#</div>",
-      type: {
-        height: 35
-      },
-      select: true,
-      data: big_film_set,
-      on: {
-        onSelectChange: function () {
-          $$('leafs_pages_list_menu').enable();
-        }
-      }
-    }
-  ]
-};
-
 var prance_layout = {
   window_pages_ui: null,
   __layout_top_submenu: {eye: null, plugin: null, template: null, user: null},
@@ -314,14 +190,16 @@ var prance_layout = {
                     data: [],
                     on: {
                       onItemClick: function (id) {
-                        dDebug($$('attribute-nodetree').getItem(id));
-                        dDebug(prance_iframe_event._iframe_all_node[id]);
-                        dDebug($(prance_iframe_event._iframe_all_node[id]).context.nodeName);
+                        //dDebug($$('attribute-nodetree').getItem(id));
+                        dDebug(id);
+                        //dDebug(prance_iframe_event._iframe_all_node[id]);
+                        //dDebug($(prance_iframe_event._iframe_all_node[id]).context.nodeName);
 
-                        var o = prance_unit.webix_jquery_object('body-iframe')
-                            .find('iframe').contents()
-                            .find(prance_iframe_event._iframe_all_node[id]);
-                        prance_iframe_event.on_click($(prance_iframe_event._iframe_all_node[id]));
+                        /*var o = prance_unit.webix_jquery_object('body-iframe')
+                         .find('iframe').contents()
+                         .find(prance_iframe_event._iframe_all_node[id]);*/
+                        var item = $$('attribute-nodetree').getItem(id);
+                        prance_iframe_event.on_click($(prance_iframe_event._iframe_all_node[item.order_id]));
                       }
                     }
                   }
@@ -346,33 +224,41 @@ var prance_layout = {
       id: 'prance_leafs_win',
       hidden: true,
       head: false,
-      headHeight: 30,
       top: 35,
       left: 38,
       height: prance_ui_object.prance_iframe().$height - 30,
       width: 300,
       body: {
-
+        id: 'prance_pages_win_body',
         view: "tabview",
+        tabbar: {
+          popupWidth: 90,
+          tabMinWidth: 60
+        },
         cells: [
           {
             header: "Pages",
-            body: prance_leafs_win_object
+            body: prance_leafs_win_object.pages
+          },
+          {
+            header: "Collections",
+            body: prance_leafs_win_object.data_collections
           },
           {
             header: "Components",
             body: {
-              id: "formView",
+              id: "plw_tab_data_components",
               template: "Components"
             }
           }
-        ],
-
-        id: 'prance_pages_win_body'
+        ]
       },
       on: {
         onShow: function () {
           prance_layout.debug('CLICK pages!');
+        },
+        onHide: function () {
+          prance_leafs_win_object.on_hide();
         }
       }
     });
