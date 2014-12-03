@@ -1,0 +1,18 @@
+Webix Pivot v.2.0.6
+==============
+
+http://pivot.webix.com
+
+If you don't know where to start - check 
+
+- http://docs.webix.com/desktop__pivot.html
+- in this package, check samples/60_pro/05_pivot
+
+
+### Commercial license and Support
+
+You can buy commercial license and support subscription at http://webix.com
+
+
+
+(c) XB Software Ltd. 2014
